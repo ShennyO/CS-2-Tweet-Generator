@@ -1,27 +1,26 @@
 import random
 import sys
+import time
 
 def generate_random_sentence(input_number):
     with open('/usr/share/dict/words', 'r') as f:
-        number_of_words = input_number
-        # sentence = []
-        all_words = f.readlines()
-        all_words_array = list(all_words)
+        first_time = time.time()
+        second_time = time.time()
+        reading_time = second_time - first_time
+        all_words_array = f.read().split()
         output = []
-        for index in all_words_array:
-            word = index.replace('\n', '')
-            output.append(word)
-
         sentence_array = []
-        for index in range(int(number_of_words)):
-            rand_num = random.randint(0, len(output) - 1)
-            sentence_array.append(output[rand_num])
+        for index in range(int(input_number)):
+            rand_num = random.randint(0, 235885)
+            sentence_array.append(all_words_array[rand_num])
 
         sentence = ' '.join(sentence_array)
+        third_time = time.time()
+        fxn_time = time.time() - first_time
 
 
 
-        return sentence
+        return (sentence, reading_time, fxn_time)
 
 
 
