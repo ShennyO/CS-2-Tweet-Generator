@@ -20,7 +20,7 @@ def generate_random_sentence(input_number):
 
 
 
-        return (sentence, reading_time, fxn_time)
+        return (sentence)
 
 
 

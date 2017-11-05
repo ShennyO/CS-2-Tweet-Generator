@@ -35,8 +35,7 @@ def get_total_words(dictionary):
 def get_random_word(dictionary, total_word_count):
     # random_num = random.randint(1, total_count)
     random_num = random.randint(1, total_word_count)
-
-
+    
     for word in dictionary:
         if dictionary[word] < random_num:
             random_num -= dictionary[word]

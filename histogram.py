@@ -8,9 +8,6 @@ def histogram_dictionary(source_file):
         all_words = f.read()
         all_words = all_words.replace('\ufeff', '')
         all_words_array = all_words.split()
-        #Now I have a list of all the words inside the source file
-        #What I need to do next is what? I need to separate all the words into a dictionary
-        #we'll call the dictionary all_words_dict
         all_words_dict = {}
 
         for word in all_words_array:
@@ -19,11 +16,14 @@ def histogram_dictionary(source_file):
             else:
                 all_words_dict[word] += 1
 
-        # plt.bar(range(len(all_words_dict)), all_words_dict.values(), align='center')
-        # plt.xticks(range(len(all_words_dict)), all_words_dict.keys(), rotation=25)
-        # plt.show()
 
         return all_words_dict
+
+
+
+
+
+
 def frequency_dictionary(word_dictionary, word):
     return word_dictionary[word]
 
