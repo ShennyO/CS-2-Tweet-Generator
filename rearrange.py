@@ -2,7 +2,13 @@ import random
 import sys
 
 
-#words = ["Kaichi", "Chris", "Poops", "lots", "of", "eats", "super"]
+def reverse_words(words):
+    reversed_word_list = []
+    for word in words:
+        reversed_word_list.insert(0, word)
+    word_list = ' '.join(reversed_word_list)
+    return word_list
+
 
 def rearrange_words(words):
     print(words)
@@ -29,6 +35,7 @@ def rearrange_words(words):
 
 if __name__ == '__main__':
     inputted = sys.argv[1:]
-    quote = rearrange_words(inputted)
-    quote = ' '.join(quote)
+    quote = reverse_words(inputted)
+    # quote = rearrange_words(inputted)
+    # quote = ' '.join(quote)
     print(quote)
