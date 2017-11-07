@@ -2,7 +2,7 @@ import random
 import sys
 import time
 
-def generate_random_sentence(input_number):
+def generate_random_sentence():
     with open('76-0.txt', 'r') as f:
         first_time = time.time()
         second_time = time.time()
@@ -10,7 +10,7 @@ def generate_random_sentence(input_number):
         all_words_array = f.read().split()
         output = []
         sentence_array = []
-        for index in range(int(input_number)):
+        for index in range(20):
             rand_num = random.randint(0, 235885)
             sentence_array.append(all_words_array[rand_num])
 
