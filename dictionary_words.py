@@ -10,7 +10,7 @@ def generate_random_sentence(number_of_words):
         all_words_array = f.read().split()
         output = []
         sentence_array = []
-        count_of_words = len(all_words_list)
+        count_of_words = len(all_words_array)
         for index in range(int(number_of_words)):
             rand_num = random.randint(0, count_of_words)
             sentence_array.append(all_words_array[rand_num])
