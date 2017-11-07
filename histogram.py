@@ -31,7 +31,7 @@ def list_of_counts(source_file):
     frequency_dictionary = histogram_dictionary(source_file)
     frequencys_of_words = []
     for key in frequency_dictionary:
-        # frequencys_of_words = [[frequency_tuple[0]] for frequency_tuple in tuple_list]
+
         if frequency_dictionary[key] not in frequencys_of_words:
             new_tuple = (frequency_dictionary[key], [key])
             tuple_list.append(new_tuple)
@@ -84,39 +84,38 @@ def histogram_tuple(source_file):
 
 
 def histogram_list(source_file):
-    with open('%s' % source_file, 'r') as f:
-        all_words = f.read()
-        all_words = all_words.replace('\ufeff', '')
-        all_words_array = all_words.split()
-        cleaned_words_array = []
-        for word in all_words_array:
-            cleaned_word = ''
-            for character in word:
-                if character not in punctuation:
+
+    all_words_array = read_source_file(source_file)
+    cleaned_words_array = []
+    for word in all_words_array:
+        cleaned_word = ''
+        for character in word:
+            if character not in punctuation:
                     cleaned_word += character
-            if cleaned_word.isalpha():
-                cleaned_words_array.append(cleaned_word)
+        if cleaned_word.isalpha():
+            cleaned_words_array.append(cleaned_word)
 
 
-        unique_word_list = []
-        all_words_list = []
-        for first_looped_word in cleaned_words_array:
-            if first_looped_word not in unique_word_list:
-                count = 1
-                new_word = [first_looped_word, count]
-                unique_word_list.append(first_looped_word)
-                all_words_list.append(new_word)
-            else:
-                for index in all_words_list:
-                    if index[0] == first_looped_word:
-                        index[1] +=1
+    unique_word_list = []
+    all_words_list = []
+    for first_looped_word in cleaned_words_array:
+        if first_looped_word not in unique_word_list:
+            count = 1
+            new_word = [first_looped_word, count]
+            unique_word_list.append(first_looped_word)
+            all_words_list.append(new_word)
+        else:
+            for index in all_words_list:
+                if index[0] == first_looped_word:
+                    index[1] +=1
 
         return all_words_list
 
 
 
 if __name__ == '__main__':
-    tuple_list = list_of_counts('76-0.txt')
+    # tuple_list = list_of_counts('76-0.txt')
+    tuple_list = histogram_list('76-0.txt')
     print(tuple_list)
     # inputted = sys.argv[1:]
     # word_count = int(inputted[0])
