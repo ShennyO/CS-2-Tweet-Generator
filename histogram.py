@@ -37,7 +37,7 @@ def list_of_counts(source_file):
             tuple_list.append(new_tuple)
             frequencys_of_words.append(frequency_dictionary[key])
         else:
-            
+
             for index, frequency in enumerate(frequencys_of_words):
                 if frequency_dictionary[key] == frequency:
                     tuple_list[index][1].append(key)

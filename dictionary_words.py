@@ -3,7 +3,7 @@ import sys
 import time
 
 def generate_random_sentence(input_number):
-    with open('/usr/share/dict/words', 'r') as f:
+    with open('76-0.txt', 'r') as f:
         first_time = time.time()
         second_time = time.time()
         reading_time = second_time - first_time
