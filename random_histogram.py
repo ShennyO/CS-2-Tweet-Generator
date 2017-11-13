@@ -33,9 +33,8 @@ def get_total_words(dictionary):
     return total_count
 
 def get_random_word(dictionary, total_word_count):
-    # random_num = random.randint(1, total_count)
-    random_num = random.randint(1, total_word_count)
 
+    random_num = random.randint(1, total_word_count)
     for word in dictionary:
         if dictionary[word] < random_num:
             random_num -= dictionary[word]
@@ -44,23 +43,9 @@ def get_random_word(dictionary, total_word_count):
 
 
 
-
-
-
-
-
-
 def main():
     unique_word_dict = histogram_dictionary('76-0.txt')
-    # total = get_total_words(unique_word_dict)
-    # random_word = get_random_word(unique_word_dict, total)
-    # print(total)
-    # print(random_word)
     print(unique_word_dict)
-
-
-
-
 
 
 

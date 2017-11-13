@@ -1,7 +1,8 @@
 #!python
 
 from __future__ import division, print_function  # Python 2 and 3 compatibility
-
+import random
+import pdb
 
 class Dictogram(dict):
     """Dictogram is a histogram implemented as a subclass of the dict type."""
@@ -13,17 +14,63 @@ class Dictogram(dict):
         self.types = 0  # Count of distinct word types in this histogram
         self.tokens = 0  # Total count of all word tokens in this histogram
         # Count words in given list, if any
+        self.markov_dictionary = {}
         if word_list is not None:
             for word in word_list:
                 self.add_count(word)
+        self.words = word_list
+        self.set_markov()
+        self.generate_sentence()
 
     def add_count(self, word, count=1):
         """Increase frequency count of given word by given count amount."""
         # TODO: Increase word frequency by count
+        if word not in self:
+            self[word] = count
+            self.tokens +=count
+            self.types +=1
+        else:
+            self[word] +=count
+            self.tokens +=count
+
+    def set_markov(self):
+        for index, word in enumerate(self.words):
+            if word not in self.markov_dictionary:
+                selected_index = index
+                next_word = self.words[selected_index + 1]
+                self.markov_dictionary[word] = [next_word]
+            else:
+
+                selected_index = index
+                if index < len(self.words) -1:
+                    next_word = self.words[selected_index + 1]
+                    if next_word not in self.markov_dictionary[word]:
+                        self.markov_dictionary[word].append(next_word)
+        print(self.markov_dictionary)
+
+    def generate_sentence(self):
+        sentence = []
+        random_index = random.randint(0, len(self.words) -1)
+        selected_word = self.words[random_index]
+
+        n = 0
+        while (n < 10):
+            sentence.append(selected_word)
+            next_word_choices = self.markov_dictionary[selected_word]
+            selected_word = random.choice(next_word_choices)
+            n+=1
+        joined_sentence = ' '.join(sentence)
+        print("sentence: %s" % joined_sentence)
+
+
 
     def frequency(self, word):
         """Return frequency count of given word, or 0 if word is not found."""
         # TODO: Retrieve word frequency count
+        if word not in self:
+            return 0
+        else:
+            return self[word]
 
 
 def print_histogram(word_list):
@@ -32,6 +79,7 @@ def print_histogram(word_list):
     histogram = Dictogram(word_list)
     print('dictogram: {}'.format(histogram))
     print('{} tokens, {} types'.format(histogram.tokens, histogram.types))
+    print('dictionary: {}'.format(histogram.markov_dictionary))
     for word in word_list[-2:]:
         freq = histogram.frequency(word)
         print('{!r} occurs {} times'.format(word, freq))
