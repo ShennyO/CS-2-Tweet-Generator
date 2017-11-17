@@ -1,5 +1,5 @@
 #!python
-
+import pdb
 
 class Node(object):
 
@@ -56,25 +56,62 @@ class LinkedList(object):
         """Return the length of this linked list by traversing its nodes.
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all nodes and count one for each
+        count = 0
+        current_node = self.head
+        if current_node is not None:
+            count +=1
+            while current_node.next is not None:
+                current_node = current_node.next
+                count+=1
+        return count
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Create new node to hold given item
+        new_node = Node(item)
         # TODO: Append node after tail, if it exists
+        #The whole point of this is so we can set the current node's next
+        if self.tail is None:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            self.tail.next = new_node
+            self.tail = new_node
 
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
         TODO: Running time: O(???) Why and under what conditions?"""
         # TODO: Create new node to hold given item
+        # pdb.set_trace()
+        new_node = Node(item)
         # TODO: Prepend node before head, if it exists
+        if self.head is not None:
+            current_head = self.head
+            new_node.next = current_head
+            self.head = new_node
+        else:
+            self.head = new_node
+            self.tail = new_node
 
+    #At this point, we should have all of our list already
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
         TODO: Best case running time: O(???) Why and under what conditions?
         TODO: Worst case running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all nodes to find item where quality(item) is True
         # TODO: Check if node's data satisfies given quality function
+
+        current_node = self.head
+
+        if quality(current_node.data):
+            return current_node.data
+        else:
+            while current_node.next is not None:
+                current_node = current_node.next
+                if quality(current_node.data):
+                    return current_node.data
+        return None
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
@@ -84,6 +121,82 @@ class LinkedList(object):
         # TODO: Update previous node to skip around node with matching data
         # TODO: Otherwise raise error to tell user that delete has failed
         # Hint: raise ValueError('Item not found: {}'.format(item))
+        # pdb.set_trace()
+        count = 0
+
+        if self.head is None:
+            raise ValueError('Item not found: {}'.format(item))
+        find_item = self.find(lambda item_: item_ == item)
+        if find_item is None:
+            raise ValueError('Item not found: {}'.format(item))
+        else:
+            # pdb.set_trace()
+            if self.head.data == item and self.head.next is not None:
+                selected_node = self.head #A
+                self.head = selected_node.next
+
+
+
+            current_node = self.head
+
+            while current_node.next is not None:
+                # if self.head.data == item and self.head.next is not None:
+                #     selected_node = current_node #A
+                #     self.head = selected_node.next
+                #     current_node = self.head
+                #
+                #
+                # next_node = current_node.next
+                # if next_node.data == item:
+                #     current_node.next = next_node.next
+
+                # if current_node.data == item:
+                #     next_node = current_node.next
+                #     current_node.next = next_node.next
+                # pdb.set_trace()
+
+                if current_node.next.data == item:
+                    next_node = current_node.next
+                    if next_node == self.tail:
+                        self.tail = current_node
+                        current_node.next = None
+                    else:
+                        current_node.next = next_node.next
+                else:
+                    current_node = current_node.next
+
+                # elif current_node.next == self.tail: #if its the last node
+                #     tail_node = self.tail
+                #     if tail_node.data == item:
+                #         self.tail = current_node
+                #         current_node.next = None
+                #
+                #     else:
+                #         current_node = current_node.next
+
+
+
+                # else:
+                #     current_node = current_node.next
+
+
+
+            if self.head == self.tail:
+
+                if self.head.data == item:
+                    self.head = None
+                    self.tail = None
+
+
+
+
+
+
+
+
+
+
+
 
 
 def test_linked_list():

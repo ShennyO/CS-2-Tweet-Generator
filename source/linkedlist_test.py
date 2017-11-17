@@ -2,6 +2,7 @@
 
 from linkedlist import LinkedList, Node
 import unittest
+import pdb
 
 
 class NodeTest(unittest.TestCase):
@@ -145,6 +146,7 @@ class LinkedListTest(unittest.TestCase):
         assert ll.find(lambda item: item == 'X') is None  # No matching item
 
     def test_delete_with_3_items(self):
+        # pdb.set_trace()
         ll = LinkedList(['A', 'B', 'C'])
         assert ll.head.data == 'A'  # First item
         assert ll.tail.data == 'C'  # Last item
@@ -166,6 +168,7 @@ class LinkedListTest(unittest.TestCase):
             ll.delete('C')  # Item no longer in list
 
     def test_delete_with_5_items(self):
+
         ll = LinkedList(['A', 'B', 'C', 'D', 'E'])
         assert ll.head.data == 'A'  # First item
         assert ll.tail.data == 'E'  # Last item
@@ -175,6 +178,7 @@ class LinkedListTest(unittest.TestCase):
         ll.delete('E')
         assert ll.head.data == 'B'  # Unchanged
         assert ll.tail.data == 'D'  # New tail
+        # pdb.set_trace()
         ll.delete('C')
         assert ll.head.data == 'B'  # Unchanged
         assert ll.tail.data == 'D'  # Unchanged

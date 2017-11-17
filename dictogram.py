@@ -34,37 +34,6 @@ class Dictogram(dict):
             self[word] +=count
             self.tokens +=count
 
-    # def set_markov(self):
-    #     for index, word in enumerate(self.words):
-    #         if word not in self.markov_dictionary:
-    #             selected_index = index
-    #             next_word = self.words[selected_index + 1]
-    #             self.markov_dictionary[word] = {next_word: 1}
-    #         else:
-    #             selected_index = index
-    #             if index < len(self.words) -1:
-    #                 next_word = self.words[selected_index + 1]
-    #                 if next_word not in self.markov_dictionary[word]:
-    #                     self.markov_dictionary[word][next_word] =1
-    #                 else:
-    #                     self.markov_dictionary[word][next_word]+=1
-    #     print(self.markov_dictionary)
-
-    # def generate_sentence(self):
-    #     sentence = []
-    #     random_index = random.randint(0, len(self.words) -1)
-    #     selected_word = self.words[random_index]
-    #
-    #     n = 0
-    #     while (n < 10):
-    #         sentence.append(selected_word)
-    #         next_word_choices = self.markov_dictionary[selected_word]
-    #         random_num = random.randint(0, len(self.words) -1)
-    #         selected_word = random.choice(next_word_choices)
-    #         n+=1
-    #     joined_sentence = ' '.join(sentence)
-    #     print("sentence: %s" % joined_sentence)
-
 
 
     def frequency(self, word):
