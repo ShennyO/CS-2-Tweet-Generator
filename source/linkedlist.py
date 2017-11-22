@@ -11,7 +11,7 @@ class Node(object):
     def __repr__(self):
         """Return a string representation of this node."""
         return 'Node({!r})'.format(self.data)
-
+#comment
 
 class LinkedList(object):
 
@@ -140,7 +140,7 @@ class LinkedList(object):
             current_node = self.head
 
             while current_node.next is not None:
-                
+
                 if current_node.next.data == item:
                     next_node = current_node.next
                     if next_node == self.tail:
