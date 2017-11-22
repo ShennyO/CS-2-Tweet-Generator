@@ -140,21 +140,7 @@ class LinkedList(object):
             current_node = self.head
 
             while current_node.next is not None:
-                # if self.head.data == item and self.head.next is not None:
-                #     selected_node = current_node #A
-                #     self.head = selected_node.next
-                #     current_node = self.head
-                #
-                #
-                # next_node = current_node.next
-                # if next_node.data == item:
-                #     current_node.next = next_node.next
-
-                # if current_node.data == item:
-                #     next_node = current_node.next
-                #     current_node.next = next_node.next
-                # pdb.set_trace()
-
+                
                 if current_node.next.data == item:
                     next_node = current_node.next
                     if next_node == self.tail:
@@ -164,22 +150,6 @@ class LinkedList(object):
                         current_node.next = next_node.next
                 else:
                     current_node = current_node.next
-
-                # elif current_node.next == self.tail: #if its the last node
-                #     tail_node = self.tail
-                #     if tail_node.data == item:
-                #         self.tail = current_node
-                #         current_node.next = None
-                #
-                #     else:
-                #         current_node = current_node.next
-
-
-
-                # else:
-                #     current_node = current_node.next
-
-
 
             if self.head == self.tail:
 
