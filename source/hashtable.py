@@ -96,19 +96,16 @@ class HashTable(object):
         #Steps: Hash the key and find the corresponding index of our bucket array.
         # Use the find function of the linked list to iterate through that linked list
         # If it finds our key, we'll return that object[1], our object being our selected tuple
-        bucket_index = hash_and_return_index(key, self.buckets)
-        selected_bucket = self.buckets[bucket_index]
-        if selected_bucket.head is not None:
-            object_key = key
-            #the item is going to act as what gets passed into the find function
-            #In our case, it's going to be the node's data, which is a tuple
-            if selected_bucket.find(lambda item: item[0] == key) is not None:
-                found_object = selected_bucket.find(lambda item: item[0] == key)
-                return found_object[1]
-            else:
-                raise KeyError('Key not found: {}'.format(key))
-        else:
-            raise KeyError('Key not found: {}'.format(key))
+
+        selected_bucket = find_bucket(key, self.buckets)
+
+        #the item is going to act as what gets passed into the find function
+        #In our case, it's going to be the node's data, which is a tuple
+        found_object = selected_bucket.find(lambda item: item[0] == key)
+        if found_object != None:
+            return found_object[1]
+
+        raise KeyError('Key not found: {}'.format(key))
 
 
         # TODO: Find bucket where given key belongs
@@ -136,21 +133,18 @@ class HashTable(object):
         #we know it's empty and we can jut append a new node, but if it has a head, then we can use the find method and update
 
 
-        if selected_bucket.head is not None:
-            #the .find's parameter is a condition, its a boolean
 
-            if selected_bucket.find(lambda item: item[0] == new_object[0]) is not None:
-                #Now we have an error when we have to append a new object to a LinkedList
-                #We also need to check if the key-value exists in the bucket, and if it does update, but if not, we append
-                #At this point, we have to update that specific tuple into our new object
-                found_object = selected_bucket.find(lambda item: item[0] == new_object[0])
-                self.delete(found_object[0])
-                selected_bucket.append(new_object)
-                print(selected_bucket)
-            else:
-                selected_bucket.append(new_object)
+        if selected_bucket.find(lambda item: item[0] == new_object[0]) is not None:
+        #Now we have an error when we have to append a new object to a LinkedList
+        #We also need to check if the key-value exists in the bucket, and if it does update, but if not, we append
+        #At this point, we have to update that specific tuple into our new object
+            found_object = selected_bucket.find(lambda item: item[0] == new_object[0])
+            self.delete(found_object[0])
+            selected_bucket.append(new_object)
+            print(selected_bucket)
         else:
             selected_bucket.append(new_object)
+
 
 
     def delete(self, key):

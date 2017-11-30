@@ -94,6 +94,18 @@ class LinkedList(object):
             self.head = new_node
             self.tail = new_node
 
+    def replace(self, olditem, newitem):
+        new_node = Node(newitem)
+        if self.head is not None:
+            current_node = self.head
+            while current_node.next is not None:
+                if current_node.next.data == olditem:
+                    current_node.next = new_node
+                else:
+                    current_node = current_node.next
+        #We want to traverse through the linked list, and if the current node.next is equal
+        #to the old item, then we set the current node's next to the new item
+
     #At this point, we should have all of our list already
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
@@ -101,17 +113,17 @@ class LinkedList(object):
         TODO: Worst case running time: O(???) Why and under what conditions?"""
         # TODO: Loop through all nodes to find item where quality(item) is True
         # TODO: Check if node's data satisfies given quality function
+        if self.head != None:
+            current_node = self.head
 
-        current_node = self.head
-
-        if quality(current_node.data):
-            return current_node.data
-        else:
-            while current_node.next is not None:
-                current_node = current_node.next
-                if quality(current_node.data):
-                    return current_node.data
-        return None
+            if quality(current_node.data):
+                return current_node.data
+            else:
+                while current_node.next is not None:
+                    current_node = current_node.next
+                    if quality(current_node.data):
+                        return current_node.data
+            return None
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
@@ -195,6 +207,8 @@ def test_linked_list():
         print('head: {}'.format(ll.head))
         print('tail: {}'.format(ll.tail))
         print('length: {}'.format(ll.length()))
+
+    print('\nTesting replace:')
 
 
 if __name__ == '__main__':
