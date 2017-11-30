@@ -141,7 +141,6 @@ class HashTable(object):
             found_object = selected_bucket.find(lambda item: item[0] == new_object[0])
             self.delete(found_object[0])
             selected_bucket.append(new_object)
-            print(selected_bucket)
         else:
             selected_bucket.append(new_object)
 
@@ -153,15 +152,14 @@ class HashTable(object):
         # TODO: Find bucket where given key belongs
         selected_bucket = find_bucket(key, self.buckets)
         # TODO: Check if key-value entry exists in bucket
-        if selected_bucket.head is not None:
-            if selected_bucket.find(lambda item: item[0] == key) is not None:
-                found_object = selected_bucket.find(lambda item: item[0] == key)
 
-                selected_bucket.delete(found_object)
-            else:
-                raise KeyError('Key not found: {}'.format(key))
+        if selected_bucket.find(lambda item: item[0] == key) is not None:
+            found_object = selected_bucket.find(lambda item: item[0] == key)
+
+            selected_bucket.delete(found_object)
         else:
             raise KeyError('Key not found: {}'.format(key))
+
         # TODO: If found, delete entry associated with given key
         # TODO: Otherwise, raise error to tell user delete failed
         # Hint: raise KeyError('Key not found: {}'.format(key))
